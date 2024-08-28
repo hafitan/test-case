@@ -10,8 +10,8 @@ class Districts extends Model
 {
     use HasFactory;
     protected $primaryKey = 'district_id';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    // public $incrementing = false;
+    // protected $keyType = 'string';
 
     // public static function boot()
     // {

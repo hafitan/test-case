@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\File;
+use App\Models\Provinces;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +14,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $jsonPath = database_path('seeders/mst_province.json');
+        $json = File::get($jsonPath);
+        $data = json_decode($json, true);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        foreach ($data as $item) {
+            Provinces::insert(
+                [
+                    'province_id' => $item['id'],
+                    'province_name' => $item['name'],
+                    'created_at' => now()
+                ]
+            );
+        }
     }
 }

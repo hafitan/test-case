@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/home/api', [AccountsController::class, 'index']);
+Route::post('/home/store/api', [AccountsController::class, 'store']);
+Route::get('/subdistrict/api/{districtId}', [AccountsController::class, 'getSubdistricts']);
+Route::get('/ward/api/{subdistrictId}', [AccountsController::class, 'getWards']);
+Route::put('approval/api/{account_id}', [AccountsController::class, 'updateApproval']);

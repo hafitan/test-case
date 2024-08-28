@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('birth_place');
             $table->string('birth_date');
             $table->string('gender');
-            $table->string('job_id');
-            $table->string('province_id');
-            $table->string('city_id');
-            $table->string('district_id');
-            $table->string('subdistrict_id');
+            $table->string('ref_job_id');
+            $table->string('ref_province_id');
+            $table->string('ref_district_id');
+            $table->string('ref_subdistrict_id');
+            $table->string('ref_ward_id');
             $table->string('street_name');
             $table->string('rt');
             $table->string('rw');

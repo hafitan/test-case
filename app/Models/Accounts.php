@@ -10,22 +10,21 @@ class Accounts extends Model
 {
     use HasFactory;
     protected $primaryKey = 'account_id';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    protected $fillable = [
+        'name_account',
+        'birth_place',
+        'birth_date',
+        'gender',
+        'job_id',
+        'deposit_amount',
+        'province_id',
+        'city_id',
+        'district_id',
+        'subdistrict_id',
+        'street_name',
+        'rt',
+        'rw',
+        'created_by',        
+    ];
 
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $lastCustomer = self::orderBy('account_id', 'desc')->first();
-            if (!$lastCustomer) {
-                $model->account_id = 'BD001';
-            } else {
-                $lastId = (int) Str::substr($lastCustomer->account_id, 2);
-                $newId = str_pad($lastId + 1, 3, '0', STR_PAD_LEFT);
-                $model->account_id = 'BD' . $newId;
-            }
-        });
-    }
 }

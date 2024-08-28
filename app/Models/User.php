@@ -14,8 +14,6 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $primaryKey = 'user_id';
-    public $incrementing = false;
-    protected $keyType = 'string';
 
 
     /**
@@ -49,20 +47,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $lastUser = self::orderBy('user_id', 'desc')->first();
-            if (!$lastUser) {
-                $model->user_id = 'AA0001';
-            } else {
-                $lastId = (int) Str::substr($lastUser->user_id, 2);
-                $newId = str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
-                $model->user_id = 'AA' . $newId;
-            }
-        });
-    }
 }
